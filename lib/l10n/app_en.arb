@@ -2,5 +2,9 @@
 	"@_TITLE": {},
 	"appTitle": "Dictionary",
 	"@_DICTIONARY": {},
-	"wordNotFound": "Seems like that word doesn't exist yet!"
+	"wordNotFound": "Seems like that word doesn't exist yet!",
+	"meaning": "Meaning",
+	"synonyms": "Synonyms",
+	"antonyms": "Antonyms",
+	"source": "Source"
 }

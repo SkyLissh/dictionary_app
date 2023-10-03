@@ -39,8 +39,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: colorScheme.background,
         leading: const Icon(TablerIcons.book_2),
+        elevation: 0,
         actions: [
           Switch(
             value: _value,
@@ -49,24 +50,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           const Icon(TablerIcons.moon)
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(Paddings.medium),
-          child: Column(children: [
-            TextField(
-              onChanged: _onSearch,
-              decoration: InputDecoration(
-                suffixIcon: const Icon(TablerIcons.search),
-                suffixIconColor: colorScheme.primary,
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.all(Paddings.medium),
+            sliver: SliverToBoxAdapter(
+              child: TextField(
+                onChanged: _onSearch,
+                decoration: InputDecoration(
+                  suffixIcon: const Icon(TablerIcons.search),
+                  suffixIconColor: colorScheme.primary,
+                ),
               ),
             ),
-            wordDefinition.when(
+          ),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: wordDefinition.when(
               data: (data) => DictionaryInfo(wordDefinition: data),
               error: (error, stack) => const WordNotFound(),
               loading: () => const Center(child: CircularProgressIndicator()),
             ),
-          ]),
-        ),
+          ),
+        ],
       ),
     );
   }

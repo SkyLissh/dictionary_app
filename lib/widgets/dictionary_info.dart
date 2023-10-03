@@ -1,7 +1,9 @@
 import "package:flutter/material.dart";
 import "package:flutter_tabler_icons/flutter_tabler_icons.dart";
+import "package:url_launcher/url_launcher.dart";
 
 import "package:dictionary/constants/constants.dart";
+import "package:dictionary/extensions/extensions.dart";
 import "package:dictionary/models/models.dart";
 import "package:dictionary/widgets/widgets.dart";
 
@@ -10,19 +12,25 @@ class DictionaryInfo extends StatelessWidget {
 
   const DictionaryInfo({super.key, required this.wordDefinition});
 
+  void _onLinkTap(String url) async {
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (wordDefinition == null) {
       return const WordNotFound();
     }
 
+    final l10n = context.l10n;
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: Paddings.medium),
-      child: Column(children: [
+      padding: const EdgeInsets.all(Paddings.medium),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -46,7 +54,32 @@ class DictionaryInfo extends StatelessWidget {
               ),
             )
           ],
-        )
+        ),
+        for (final meaning in wordDefinition!.meanings) ...[
+          MeaningInfo(meaning: meaning),
+        ],
+        const SizedBox(height: Paddings.medium),
+        Text(
+          l10n.source,
+          style: const TextStyle(color: Palette.zinc500),
+        ),
+        const SizedBox(height: Paddings.small),
+        MouseRegion(
+          cursor: MaterialStateMouseCursor.clickable,
+          child: GestureDetector(
+            onTap: () => _onLinkTap(wordDefinition!.sourceUrls.first),
+            child: Row(mainAxisSize: MainAxisSize.min, children: [
+              Flexible(
+                child: Text(
+                  wordDefinition!.sourceUrls.first,
+                  style: const TextStyle(decoration: TextDecoration.underline),
+                ),
+              ),
+              const SizedBox(width: Paddings.small),
+              const Icon(TablerIcons.external_link)
+            ]),
+          ),
+        ),
       ]),
     );
   }

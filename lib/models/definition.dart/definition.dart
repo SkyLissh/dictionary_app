@@ -9,6 +9,7 @@ class Definition with _$Definition {
     required String definition,
     required List<String> synonyms,
     required List<String> antonyms,
+    String? example,
   }) = _Definition;
 
   factory Definition.fromJson(Map<String, dynamic> json) =>

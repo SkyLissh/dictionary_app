@@ -23,6 +23,7 @@ mixin _$Definition {
   String get definition => throw _privateConstructorUsedError;
   List<String> get synonyms => throw _privateConstructorUsedError;
   List<String> get antonyms => throw _privateConstructorUsedError;
+  String? get example => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,11 @@ abstract class $DefinitionCopyWith<$Res> {
           Definition value, $Res Function(Definition) then) =
       _$DefinitionCopyWithImpl<$Res, Definition>;
   @useResult
-  $Res call({String definition, List<String> synonyms, List<String> antonyms});
+  $Res call(
+      {String definition,
+      List<String> synonyms,
+      List<String> antonyms,
+      String? example});
 }
 
 /// @nodoc
@@ -55,6 +60,7 @@ class _$DefinitionCopyWithImpl<$Res, $Val extends Definition>
     Object? definition = null,
     Object? synonyms = null,
     Object? antonyms = null,
+    Object? example = freezed,
   }) {
     return _then(_value.copyWith(
       definition: null == definition
@@ -69,6 +75,10 @@ class _$DefinitionCopyWithImpl<$Res, $Val extends Definition>
           ? _value.antonyms
           : antonyms // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      example: freezed == example
+          ? _value.example
+          : example // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -81,7 +91,11 @@ abstract class _$$DefinitionImplCopyWith<$Res>
       __$$DefinitionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String definition, List<String> synonyms, List<String> antonyms});
+  $Res call(
+      {String definition,
+      List<String> synonyms,
+      List<String> antonyms,
+      String? example});
 }
 
 /// @nodoc
@@ -98,6 +112,7 @@ class __$$DefinitionImplCopyWithImpl<$Res>
     Object? definition = null,
     Object? synonyms = null,
     Object? antonyms = null,
+    Object? example = freezed,
   }) {
     return _then(_$DefinitionImpl(
       definition: null == definition
@@ -112,6 +127,10 @@ class __$$DefinitionImplCopyWithImpl<$Res>
           ? _value._antonyms
           : antonyms // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      example: freezed == example
+          ? _value.example
+          : example // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -122,7 +141,8 @@ class _$DefinitionImpl implements _Definition {
   const _$DefinitionImpl(
       {required this.definition,
       required final List<String> synonyms,
-      required final List<String> antonyms})
+      required final List<String> antonyms,
+      this.example})
       : _synonyms = synonyms,
         _antonyms = antonyms;
 
@@ -148,8 +168,11 @@ class _$DefinitionImpl implements _Definition {
   }
 
   @override
+  final String? example;
+
+  @override
   String toString() {
-    return 'Definition(definition: $definition, synonyms: $synonyms, antonyms: $antonyms)';
+    return 'Definition(definition: $definition, synonyms: $synonyms, antonyms: $antonyms, example: $example)';
   }
 
   @override
@@ -160,7 +183,8 @@ class _$DefinitionImpl implements _Definition {
             (identical(other.definition, definition) ||
                 other.definition == definition) &&
             const DeepCollectionEquality().equals(other._synonyms, _synonyms) &&
-            const DeepCollectionEquality().equals(other._antonyms, _antonyms));
+            const DeepCollectionEquality().equals(other._antonyms, _antonyms) &&
+            (identical(other.example, example) || other.example == example));
   }
 
   @JsonKey(ignore: true)
@@ -169,7 +193,8 @@ class _$DefinitionImpl implements _Definition {
       runtimeType,
       definition,
       const DeepCollectionEquality().hash(_synonyms),
-      const DeepCollectionEquality().hash(_antonyms));
+      const DeepCollectionEquality().hash(_antonyms),
+      example);
 
   @JsonKey(ignore: true)
   @override
@@ -189,7 +214,8 @@ abstract class _Definition implements Definition {
   const factory _Definition(
       {required final String definition,
       required final List<String> synonyms,
-      required final List<String> antonyms}) = _$DefinitionImpl;
+      required final List<String> antonyms,
+      final String? example}) = _$DefinitionImpl;
 
   factory _Definition.fromJson(Map<String, dynamic> json) =
       _$DefinitionImpl.fromJson;
@@ -200,6 +226,8 @@ abstract class _Definition implements Definition {
   List<String> get synonyms;
   @override
   List<String> get antonyms;
+  @override
+  String? get example;
   @override
   @JsonKey(ignore: true)
   _$$DefinitionImplCopyWith<_$DefinitionImpl> get copyWith =>

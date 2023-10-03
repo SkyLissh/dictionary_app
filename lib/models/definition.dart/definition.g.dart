@@ -13,6 +13,7 @@ _$DefinitionImpl _$$DefinitionImplFromJson(Map<String, dynamic> json) =>
           (json['synonyms'] as List<dynamic>).map((e) => e as String).toList(),
       antonyms:
           (json['antonyms'] as List<dynamic>).map((e) => e as String).toList(),
+      example: json['example'] as String?,
     );
 
 Map<String, dynamic> _$$DefinitionImplToJson(_$DefinitionImpl instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$DefinitionImplToJson(_$DefinitionImpl instance) =>
       'definition': instance.definition,
       'synonyms': instance.synonyms,
       'antonyms': instance.antonyms,
+      'example': instance.example,
     };
