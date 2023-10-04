@@ -5,6 +5,7 @@ import "package:url_launcher/url_launcher.dart";
 import "package:dictionary/constants/constants.dart";
 import "package:dictionary/extensions/extensions.dart";
 import "package:dictionary/models/models.dart";
+import "package:dictionary/resizer/resizer.dart";
 import "package:dictionary/widgets/widgets.dart";
 
 class DictionaryInfo extends StatelessWidget {
@@ -26,9 +27,11 @@ class DictionaryInfo extends StatelessWidget {
 
     final l10n = context.l10n;
     final theme = Theme.of(context);
+    final resizer = ResizerWidget.of(context);
 
-    return Padding(
+    return Container(
       padding: const EdgeInsets.all(Paddings.medium),
+      width: !resizer.width.isSmall && !resizer.width.isMedium ? 1200 : null,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,11 +43,13 @@ class DictionaryInfo extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: Paddings.small),
-              Text(
-                wordDefinition!.phonetic,
-                style: TextStyle(color: theme.colorScheme.primary),
-              ),
+              if (wordDefinition?.phonetic != null) ...[
+                const SizedBox(height: Paddings.small),
+                Text(
+                  wordDefinition!.phonetic!,
+                  style: TextStyle(color: theme.colorScheme.primary),
+                ),
+              ]
             ]),
             IconButton.filledTonal(
               onPressed: () {},
@@ -64,20 +69,23 @@ class DictionaryInfo extends StatelessWidget {
           style: const TextStyle(color: Palette.zinc500),
         ),
         const SizedBox(height: Paddings.small),
-        MouseRegion(
-          cursor: MaterialStateMouseCursor.clickable,
-          child: GestureDetector(
-            onTap: () => _onLinkTap(wordDefinition!.sourceUrls.first),
-            child: Row(mainAxisSize: MainAxisSize.min, children: [
-              Flexible(
-                child: Text(
-                  wordDefinition!.sourceUrls.first,
-                  style: const TextStyle(decoration: TextDecoration.underline),
+        Flexible(
+          child: MouseRegion(
+            cursor: MaterialStateMouseCursor.clickable,
+            child: GestureDetector(
+              onTap: () => _onLinkTap(wordDefinition!.sourceUrls.first),
+              child: Row(mainAxisSize: MainAxisSize.min, children: [
+                Flexible(
+                  child: Text(
+                    wordDefinition!.sourceUrls.first,
+                    style:
+                        const TextStyle(decoration: TextDecoration.underline),
+                  ),
                 ),
-              ),
-              const SizedBox(width: Paddings.small),
-              const Icon(TablerIcons.external_link)
-            ]),
+                const SizedBox(width: Paddings.small),
+                const Icon(TablerIcons.external_link)
+              ]),
+            ),
           ),
         ),
       ]),

@@ -9,7 +9,7 @@ part of 'word_definition.dart';
 _$WordDefinitionImpl _$$WordDefinitionImplFromJson(Map<String, dynamic> json) =>
     _$WordDefinitionImpl(
       word: json['word'] as String,
-      phonetic: json['phonetic'] as String,
+      phonetic: json['phonetic'] as String?,
       phonetics: (json['phonetics'] as List<dynamic>)
           .map((e) => Phonetic.fromJson(e as Map<String, dynamic>))
           .toList(),

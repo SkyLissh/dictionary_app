@@ -7,9 +7,7 @@ import "package:dictionary/models/models.dart";
 
 final dictionaryProvider =
     StateNotifierProvider<DictionaryNotifier, AsyncValue<WordDefinition?>>(
-        (ref) {
-  return DictionaryNotifier();
-});
+        (ref) => DictionaryNotifier());
 
 class DictionaryNotifier extends StateNotifier<AsyncValue<WordDefinition?>> {
   final _url = "api.dictionaryapi.dev";
@@ -19,7 +17,8 @@ class DictionaryNotifier extends StateNotifier<AsyncValue<WordDefinition?>> {
   Future<void> search(String word) async {
     state = const AsyncValue.loading();
 
-    final uri = Uri.https(_url, "/api/v2/entries/en/$word");
+    final uri =
+        Uri.https(_url, "/api/v2/entries/en/${word.trim().toLowerCase()}");
 
     final res = await http.get(uri);
 

@@ -14,10 +14,6 @@ class MeaningInfo extends StatelessWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
 
-    for (final definition in meaning.definitions) {
-      print(definition);
-    }
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Paddings.small),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

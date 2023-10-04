@@ -9,7 +9,7 @@ part "word_definition.g.dart";
 class WordDefinition with _$WordDefinition {
   const factory WordDefinition({
     required String word,
-    required String phonetic,
+    required String? phonetic,
     required List<Phonetic> phonetics,
     required List<Meaning> meanings,
     required List<String> sourceUrls,

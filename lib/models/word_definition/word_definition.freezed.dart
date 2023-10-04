@@ -21,7 +21,7 @@ WordDefinition _$WordDefinitionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WordDefinition {
   String get word => throw _privateConstructorUsedError;
-  String get phonetic => throw _privateConstructorUsedError;
+  String? get phonetic => throw _privateConstructorUsedError;
   List<Phonetic> get phonetics => throw _privateConstructorUsedError;
   List<Meaning> get meanings => throw _privateConstructorUsedError;
   List<String> get sourceUrls => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $WordDefinitionCopyWith<$Res> {
   @useResult
   $Res call(
       {String word,
-      String phonetic,
+      String? phonetic,
       List<Phonetic> phonetics,
       List<Meaning> meanings,
       List<String> sourceUrls});
@@ -60,7 +60,7 @@ class _$WordDefinitionCopyWithImpl<$Res, $Val extends WordDefinition>
   @override
   $Res call({
     Object? word = null,
-    Object? phonetic = null,
+    Object? phonetic = freezed,
     Object? phonetics = null,
     Object? meanings = null,
     Object? sourceUrls = null,
@@ -70,10 +70,10 @@ class _$WordDefinitionCopyWithImpl<$Res, $Val extends WordDefinition>
           ? _value.word
           : word // ignore: cast_nullable_to_non_nullable
               as String,
-      phonetic: null == phonetic
+      phonetic: freezed == phonetic
           ? _value.phonetic
           : phonetic // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phonetics: null == phonetics
           ? _value.phonetics
           : phonetics // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ abstract class _$$WordDefinitionImplCopyWith<$Res>
   @useResult
   $Res call(
       {String word,
-      String phonetic,
+      String? phonetic,
       List<Phonetic> phonetics,
       List<Meaning> meanings,
       List<String> sourceUrls});
@@ -118,7 +118,7 @@ class __$$WordDefinitionImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? word = null,
-    Object? phonetic = null,
+    Object? phonetic = freezed,
     Object? phonetics = null,
     Object? meanings = null,
     Object? sourceUrls = null,
@@ -128,10 +128,10 @@ class __$$WordDefinitionImplCopyWithImpl<$Res>
           ? _value.word
           : word // ignore: cast_nullable_to_non_nullable
               as String,
-      phonetic: null == phonetic
+      phonetic: freezed == phonetic
           ? _value.phonetic
           : phonetic // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phonetics: null == phonetics
           ? _value._phonetics
           : phonetics // ignore: cast_nullable_to_non_nullable
@@ -167,7 +167,7 @@ class _$WordDefinitionImpl implements _WordDefinition {
   @override
   final String word;
   @override
-  final String phonetic;
+  final String? phonetic;
   final List<Phonetic> _phonetics;
   @override
   List<Phonetic> get phonetics {
@@ -240,7 +240,7 @@ class _$WordDefinitionImpl implements _WordDefinition {
 abstract class _WordDefinition implements WordDefinition {
   const factory _WordDefinition(
       {required final String word,
-      required final String phonetic,
+      required final String? phonetic,
       required final List<Phonetic> phonetics,
       required final List<Meaning> meanings,
       required final List<String> sourceUrls}) = _$WordDefinitionImpl;
@@ -251,7 +251,7 @@ abstract class _WordDefinition implements WordDefinition {
   @override
   String get word;
   @override
-  String get phonetic;
+  String? get phonetic;
   @override
   List<Phonetic> get phonetics;
   @override
