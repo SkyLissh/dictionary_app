@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_tabler_icons/flutter_tabler_icons.dart";
-import "package:url_launcher/url_launcher.dart";
+import "package:audioplayers/audioplayers.dart";
 
 import "package:dictionary/constants/constants.dart";
 import "package:dictionary/extensions/extensions.dart";
@@ -13,10 +13,10 @@ class DictionaryInfo extends StatelessWidget {
 
   const DictionaryInfo({super.key, required this.wordDefinition});
 
-  void _onLinkTap(String url) async {
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    }
+  String get _audio {
+    return wordDefinition!.phonetics
+        .firstWhere((e) => e.audio.isNotEmpty)
+        .audio;
   }
 
   @override
@@ -51,13 +51,7 @@ class DictionaryInfo extends StatelessWidget {
                 ),
               ]
             ]),
-            IconButton.filledTonal(
-              onPressed: () {},
-              icon: Icon(
-                TablerIcons.player_play_filled,
-                color: theme.colorScheme.primary,
-              ),
-            )
+            MediaButton(source: UrlSource(_audio)),
           ],
         ),
         for (final meaning in wordDefinition!.meanings) ...[
@@ -69,25 +63,7 @@ class DictionaryInfo extends StatelessWidget {
           style: const TextStyle(color: Palette.zinc500),
         ),
         const SizedBox(height: Paddings.small),
-        Flexible(
-          child: MouseRegion(
-            cursor: MaterialStateMouseCursor.clickable,
-            child: GestureDetector(
-              onTap: () => _onLinkTap(wordDefinition!.sourceUrls.first),
-              child: Row(mainAxisSize: MainAxisSize.min, children: [
-                Flexible(
-                  child: Text(
-                    wordDefinition!.sourceUrls.first,
-                    style:
-                        const TextStyle(decoration: TextDecoration.underline),
-                  ),
-                ),
-                const SizedBox(width: Paddings.small),
-                const Icon(TablerIcons.external_link)
-              ]),
-            ),
-          ),
-        ),
+        Flexible(child: Link(url: wordDefinition!.sourceUrls.first)),
       ]),
     );
   }
